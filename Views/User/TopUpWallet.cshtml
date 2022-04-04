@@ -1,0 +1,20 @@
+﻿
+<p>
+    <a asp-action="index1">Index</a>
+    <a asp-action="index">Pick a User</a>
+</p>
+
+<form method="get" action="TopUpWallet">
+    <label for="amount">How much do you want to Top-Up?</label>
+    <input type="number" id="amount" name="amount" min="1"/>
+    <input type="hidden" name="userId" value="@ViewBag.UserId"/>
+    <button type="submit">Top-Up</button>
+</form>
+
+@if(ViewBag.Amount != null){
+    <h1>Hey!! Your Top-Up Has Been Successful</h1>
+    <div>
+        <p>You added $@ViewBag.Amount to your Wallet</p>
+        <p>Your balance now is: $@ViewBag.WalletAmount</p>
+    </div>
+}

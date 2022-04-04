@@ -1,0 +1,32 @@
+﻿
+@model MyiTunes.ViewModels.SongsTopsDetailsViewModel
+
+<h1>Top Selling Songs</h1>
+<ol>
+@foreach(var item in Model.TopSongs)
+{   
+    <li>
+        @item.Title
+    </li>
+}
+</ol>
+
+<h1>Top Selling Artist</h1>
+<ol>
+@foreach(var item in Model.TopArtist)
+{   
+    <li>
+        @item.FullName
+    </li>
+}
+</ol>
+
+<h1>Top Rated Songs</h1>
+<ol>
+@foreach(var item in Model.TopRated)
+{   
+    <li>
+        @item.Title
+    </li>
+}
+</ol>

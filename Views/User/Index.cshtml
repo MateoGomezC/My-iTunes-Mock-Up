@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MyiTunes.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Index1" >Index</a>
+    <a asp-action="Index" asp-controller="Song">Songs List</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                <a asp-action="BuySong" asp-route-userId="@item.Id">Song</a> |
+                <a asp-action="TopUpWallet" asp-route-userId="@item.Id">Top-up</a> |
+                <a asp-action="RateSong" asp-route-userId="@item.Id">Rate</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

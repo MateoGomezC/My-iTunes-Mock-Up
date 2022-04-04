@@ -1,0 +1,62 @@
+﻿@model List<Song>
+
+<h1>Select Artist</h1>
+
+
+<form method="get" action="SelectArtist">
+    <select name="artistId" asp-items="@ViewBag.Artists"></select>
+    <button type="submit">Submit</button>
+</form>
+
+@if(Model != null)
+{
+    
+<h2>List Of Songs</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Average Ranting
+            </th>
+            <th>
+                Artist
+            </th>
+            <th>
+                Number Of Purchases
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist.FullName)
+            </td>
+            <td>
+                @item.Purchases.Count()
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}
+
+<p>
+    <a asp-action="Index">Go back to the index</a>
+</p>

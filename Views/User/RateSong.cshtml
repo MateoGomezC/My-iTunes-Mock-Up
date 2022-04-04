@@ -1,0 +1,60 @@
+﻿@model ICollection<Purchase>
+
+@{
+    ViewData["Title"] = "RateSong";
+}
+
+@if(Model.Any())
+{
+    <h1>Rate Song</h1>
+
+    <p>
+        <a asp-action="Index1">Index</a>
+        <a asp-action="Index">User List</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Rating
+                </th>
+                <th>
+                    Artist
+                </th>
+                <th>
+                    Rate
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @item.Song.Title
+                </td>
+                <td>
+                    @item.Song.AverageRating
+                </td>
+                <td>
+                    @item.Song.Artist.FullName
+                </td>
+                <td>
+                    <form method="post" asp-action="RateSongs" asp-route-userId="@ViewBag.UserId" asp-route-songId="@item.SongId">
+                        <input type="number" name="rate" min="1" max="10"/>
+                        <input type="submit"/>
+                    </form>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>Hey! You dont have any song to rate yet</h1>
+    <h2>Click <a asp-action="BuySong" asp-route-userId="@ViewBag.UserId">here</a> to buy a song</h2>    
+}

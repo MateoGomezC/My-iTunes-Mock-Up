@@ -1,0 +1,75 @@
+﻿@model IEnumerable<IGrouping<Artist, Purchase>>
+
+
+<form method="get" action="">
+    <select name="userId" asp-items="@ViewBag.Users"></select>
+    <button type="submit">Submit</button>
+</form>
+
+@if(Model != null)
+{
+    <ul>
+        @foreach(var artist in Model)
+        {
+            <li>@artist.Key.FullName</li>
+            <ul>
+                @foreach(var song in artist)
+                {
+                    <li>@song.Song.Title 
+                    <button><a asp-action="RateSong" asp-route-userId="@song.UserId"><strong>Rate</strong></a></button>
+                        @if((int)(DateTime.Now - song.TransactionDate).TotalDays <= 30)
+                        {
+                            <button><a asp-action="Refund" asp-route-userId="@song.UserId" asp-route-songId="@song.SongId" ><strong>Refund</strong></a></button>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+    </ul>
+}
+
+@*    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Rating
+                </th>
+                <th>
+                    Artist
+                </th>
+                <th>
+                    Rate
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @item.Song.Title
+                </td>
+                <td>
+                    @item.Song.AverageRating
+                </td>
+                <td>
+                    @item.Song.Artist.FullName
+                </td>
+                <td>
+                    <form method="post" asp-action="RateSongs" asp-route-userId="@ViewBag.UserId" asp-route-songId="@item.SongId">
+                        <input type="number" name="rate" min="1" max="10"/>
+                        <input type="submit"/>
+                    </form>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

@@ -1,0 +1,64 @@
+﻿@model IQueryable<IGrouping<Artist, Song>>
+
+@{
+    ViewData["Title"] = "SongsByArtist";
+}
+
+<h1>SongsByArtist</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+@foreach(var artist in Model){
+    <h1>@artist.Key.FullName</h1>
+    <ul>
+    @foreach(var song in artist)
+    {
+     <li>@song.Title</li>   
+    }
+    </ul>
+}
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.T)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AverageRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artist)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist.FullName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@

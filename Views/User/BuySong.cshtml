@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MyiTunes.Models.Song>
+
+@{
+    ViewData["Title"] = "BuySong";
+}
+
+<h1>BuySong</h1>
+
+<p>
+    <a asp-action="Index1">Index</a>
+    <a asp-action="Index">Users</a>
+</p>
+
+@if(@ViewBag.NotMoney == true)
+{
+    <div>
+        <h2>Oops! It looks like you forget to Top-Up your wallet</h2>
+        <a asp-action="TopUpWallet" asp-route-userId="@ViewBag.UserId">Top-Up Here</a>
+    </div>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AverageRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artist)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            @if (!item.Purchases.Any(p => p.UserId == @ViewBag.UserId))
+            {
+                <tr>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AverageRating)
+                        </td>
+                        <td>
+                            <button><a asp-action="BuySong" asp-route-songId="@item.Id" asp-route-userId="@ViewBag.UserId">Buy It!</a></button>
+                        </td>
+                    </tr>
+            }
+        }
+    </tbody>
+</table>
